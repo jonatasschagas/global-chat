@@ -44,6 +44,7 @@ public class GlobalChatHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ChatMessage chatMessage = (ChatMessage) msg;
         logger.info(chatMessage.getFullMessage());
+        // for each channel, broadcast the message
         for (Channel ch : channelGroup) {
             ch.writeAndFlush(chatMessage);
         }
